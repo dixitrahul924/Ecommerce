@@ -10,11 +10,12 @@ const logger = require("morgan");
 
 const app = express();
 
+app.use(cookieParser());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(cors());
+
+app.use(cors({ origin: true, credentials: true }));
 app.use(
   fileUpload({
     useTempFiles: true,
@@ -24,6 +25,7 @@ app.use(
 app.use("/user", require("./routes/user"));
 app.use("/image", require("./routes/upload"));
 app.use("/api", require("./routes/product"));
+app.use("/order", require("./routes/order"));
 
 //MongoDB Connection
 
@@ -34,6 +36,7 @@ mongoose.connect(URI, (err) => {
 });
 
 // catch 404 and forward to error handler
+
 app.use(function (req, res, next) {
   next(createError(404));
 });

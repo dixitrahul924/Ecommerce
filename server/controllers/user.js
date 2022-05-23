@@ -68,7 +68,7 @@ const login = async (req, res) => {
       maxAge: 6 * 24 * 60 * 60 * 1000, // 6d
     });
 
-    res.json({ accesstoken });
+    res.json({ accesstoken, refreshtoken });
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
@@ -112,4 +112,29 @@ const getUserInfo = async (req, res) => {
     return res.status(500).json({ msg: err.message });
   }
 };
-module.exports = { register, refreshToken, login, logout, getUserInfo };
+
+const addCart = async (req, res) => {
+  try {
+    const user = await Users.findById(req.user.id);
+    if (!user) return res.status(400).json({ msg: "User does not exist." });
+
+    await Users.findOneAndUpdate(
+      { _id: req.user.id },
+      {
+        cart: req.body.cart,
+      }
+    );
+
+    return res.json({ msg: "Added to cart" });
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+};
+module.exports = {
+  register,
+  refreshToken,
+  login,
+  logout,
+  getUserInfo,
+  addCart,
+};

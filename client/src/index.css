@@ -1,4 +1,5 @@
 * {
+  user-select: none;
   padding: 0;
   box-sizing: border-box;
   margin: 0;
@@ -29,3 +30,15 @@ button {
 
 /* ---------------- Header ------------ */
 @import url("./components/header/header.css");
+
+@import url("./components/main_pages/Products/product.css");
+
+@import url("./components/main_pages/detailProduct/detailproduct.css");
+
+@import url("./components/main_pages/authentication/login.css");
+
+@import url("./components/main_pages/cart/cart.css");
+
+@import url("./components/main_pages/Order/order.css");
+
+@import url("./components/main_pages/orderHistory/orderhistory.css");

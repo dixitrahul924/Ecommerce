@@ -12,8 +12,6 @@ router.get("/logout", userCtrl.logout);
 
 router.get("/info", auth.User, userCtrl.getUserInfo);
 
-// router.patch("/addcart", auth, userCtrl.addCart);
-
-// router.get("/history", auth, userCtrl.history);
+router.patch("/addcart", auth.User, userCtrl.addCart);
 
 module.exports = router;
